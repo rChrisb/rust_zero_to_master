@@ -9,6 +9,6 @@ fn main()
 {
     let mut add = my_first_function(15, 7);
     println!("{}", add);
-    add = my_first_function(1,5);
+    add = my_first_function(add,5);
     println!("{}", add);
 }
