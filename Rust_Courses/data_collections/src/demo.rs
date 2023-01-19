@@ -13,11 +13,36 @@
 // 	}
 	
 // }
-struct Test {
-	score: i32
+// struct Test {
+// 	score: i32
+// }
+
+struct LineItem {
+	name: String,
+	count: i32
+}
+fn print_item(name:&str) {
+	println!("name : {}", name)
 }
 fn main () {
-	let my_score = vec![
+	let receipt = vec![
+		LineItem {
+			name: "cereal".to_owned(),
+			count: 2,
+		},
+		LineItem {
+			name : String::from("fruit"),
+			count: 4
+		},
+	];
+	for item in receipt {
+		print_item(&item.name);
+		println!( "count: {}", item.count);
+	}
+
+
+	
+	/* let my_score = vec![
 		Test {score: 10},
 		Test {score: 15},
 		Test {score: 18},
@@ -29,7 +54,7 @@ fn main () {
 	}
 	println!("{}", my_score.len());
 	let average: f64 = (total / 3).into();
-	println!("{:?}", average);
+	println!("{:?}", average); */
 
 
 
