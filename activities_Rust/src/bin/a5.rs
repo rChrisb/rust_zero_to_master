@@ -1,4 +1,4 @@
-// Topic: Looping using the loop statement
+// Topic: Looping using the loop statement 
 //
 // Program requirements:
 // * Display "1" through "4" in the terminal
