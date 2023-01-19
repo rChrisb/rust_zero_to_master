@@ -1,4 +1,4 @@
-// Topic: Working with an enum
+// Topic: Working with an enum 
 //
 // Program requirements:
 // * Prints the name of a color to the terminal
