@@ -1,4 +1,4 @@
-// Topic: Flow control using if..else if..else
+// Topic: Flow control using if..else if..else 
 //
 // Program requirements:
 // * Display ">5", "<5", or "=5" based on the value of a variable
