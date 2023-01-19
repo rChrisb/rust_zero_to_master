@@ -9,11 +9,12 @@
 // * Use a function to print out the drink flavor and ounces
 // * Use a match expression to print the drink flavor
 
-#[derive(Debug)]
+
 enum Flavors {
 	Chocolate,
 	Apple,
-	Orange
+	Orange,
+	Strawberry
 }
 struct Drinks {
 	flavor: Flavors,
@@ -21,7 +22,7 @@ struct Drinks {
 }
 fn main() {
 	let my_drink = Drinks {
-		flavor: Flavors::Orange,
+		flavor: Flavors::Strawberry,
 		ounce: 4.2
 	};
 
@@ -34,6 +35,7 @@ fn print_drink(drink: Drinks){
 		Flavors::Chocolate => println!("This is a Chocolate drink"),
 		Flavors::Apple => println!("This is an Apple juice"),
 		Flavors::Orange => println!("This is an Orange juice"),
+		Flavors::Strawberry => println!("This is a Strawberry juice"),
 	}
 	println!("the ounce is {}", drink.ounce);
 }
