@@ -1,4 +1,4 @@
-// Topic: Basic arithmetic
+// Topic: Basic arithmetic 
 //
 // Program requirements:
 // * Displays the result of the sum of two numbers
