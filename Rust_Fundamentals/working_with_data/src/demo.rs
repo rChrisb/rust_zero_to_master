@@ -6,7 +6,7 @@ enum Direction {
 }
 
 fn main () {
-	let go = Direction::Down;
+	let go = Direction::Right;
 	// let mut go = Direction::Left;
 	// let mut go = Direction::Right;
 	// let gone = Direction::Right;
