@@ -1,4 +1,4 @@
-// #[allow(dead_code)]
+#[allow(dead_code)]
 // enum Direction {
 // 	Left,
 // 	Right,
@@ -10,7 +10,7 @@
 // 	price: f64,
 
 // }
-#[allow(dead_code)]
+
 enum AccesLevel {
 	Admin,
 	User,
