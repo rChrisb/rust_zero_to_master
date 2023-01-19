@@ -1,4 +1,4 @@
-// Topic: Functions
+// Topic: Functions 
 //
 // Program requirements:
 // * Displays your first and last name
