@@ -10,12 +10,13 @@
 // * Use break to exit the loop
 
 fn main() {
-	let mut iteration = 1;
+	let mut iterations = 1;
 
 	loop {
-		println!("{}", iteration);
-		iteration += 1;
-		if iteration == 5 {
+		/* println!("{}", iteration); */
+		println!("{iterations:?}" );
+		iterations += 1;
+		if iterations == 6 {
 			break;
 		}
 	}
