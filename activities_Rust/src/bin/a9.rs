@@ -10,7 +10,7 @@
 // * Use an if..else if..else block to determine what to print
 
 fn main() {
-	let (x, y) = cordination();
+	let (x, y) = coordination_parameters();
 
 	if y > 5 {
 		println!("y-value of catersian coordinate is greater than 5");
@@ -23,6 +23,6 @@ fn main() {
 	}
 
 }
-fn cordination() -> (i32, i32) {
+fn coordination_parameters() -> (i32, i32) {
 	return (10, 2);
 }
