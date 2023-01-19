@@ -38,6 +38,7 @@ fn main () {
 	for item in receipt {
 		print_item(&item.name);
 		println!( "count: {}", item.count);
+		
 	}
 
 
