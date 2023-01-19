@@ -1,4 +1,4 @@
-// Topic: Flow control using if..else
+// Topic: Flow control using if..else 
 //
 // Program requirements:
 // * Displays a message based on the value of a boolean variable
