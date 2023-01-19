@@ -1,4 +1,4 @@
-// Topic: Looping using the while statement
+// Topic: Looping using the while statement 
 //
 // Program requirements:
 // * Counts down from 5 to 1, displays the countdown
