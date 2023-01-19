@@ -5,13 +5,23 @@
 // 	Down,
 // }
 
-struct GroceryItem {
-	stock: i32,
-	price: f64,
+// struct GroceryItem {
+// 	stock: i32,
+// 	price: f64,
 
-}
+// }
 
 fn main () {
+
+	let favourites = ("football", "messi", "barça", "argentina");
+	let (fav_sport, fav_player, fav_team, fav_country) = favourites;
+
+	println!("{fav_player}");
+	println!("{fav_country}");
+	println!("{fav_sport}");
+	println!("{fav_team}");
+
+	println!("{}", favourites.3)
 	// let go = Direction::Right;
 	// let mut go = Direction::Left;
 	// let mut go = Direction::Right;
@@ -23,10 +33,11 @@ fn main () {
 	// 	Direction::Right => println!("Go to the Right"),
 	// 	Direction::Down => println!("Go Down"),
 	// }
-		let cereal = GroceryItem{
+		/* let cereal = GroceryItem{
 			stock: 10,
 			price: 2.99,
 		};
 		println!("the cereal stock is {0}", cereal.stock);
-		println!("the cereal price is {0}", cereal.price)
+		println!("the cereal price is {0}", cereal.price) */
+
 }
