@@ -21,7 +21,7 @@ struct Drinks {
 }
 fn main() {
 	let my_drink = Drinks {
-		flavor: Flavors::Apple,
+		flavor: Flavors::Orange,
 		ounce: 4.2
 	};
 
@@ -33,7 +33,7 @@ fn print_drink(drink: Drinks){
 	match drink.flavor {
 		Flavors::Chocolate => println!("This is a Chocolate drink"),
 		Flavors::Apple => println!("This is an Apple juice"),
-		Flavors::Orange => println!("Orange juice"),
+		Flavors::Orange => println!("This is an Orange juice"),
 	}
 	println!("the ounce is {}", drink.ounce);
 }
