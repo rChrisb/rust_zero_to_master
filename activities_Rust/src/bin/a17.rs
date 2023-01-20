@@ -10,7 +10,7 @@
 // * Navigate to the API documentation section
 // * Search for functionality to transform a string (or str)
 //   to uppercase and lowercase
-//   * Try searching for: to_uppercase, to_lowercase
+//   * Try searching for: to_uppercase, to_lowercase 
 
 fn main() {
 	let string_to_transform = "Hello bro how are you";
