@@ -24,12 +24,15 @@ fn main() {
 	store.insert("Tables".to_owned(), 2);
 	store.insert("Couches".to_owned(), 0);
 
+	let mut total_items = 0;
 	for (furniture, stock) in store {
 		if stock == 0 {
 			println!("There are no {} left", furniture)
 		} else {
 			println!("There are {} {} in the sore", stock, furniture);
 		}
+		total_items += stock;
 	}
+	println!("The total of furnitures left in the store is: {}", total_items);
 
 }
