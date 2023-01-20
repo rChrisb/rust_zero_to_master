@@ -44,4 +44,8 @@ fn main() {
 		Ok(result) => println!("{} is {}", result.name, result.age),
 		Err(result) => println!("{}", result)
 	}
+	match person_2 {
+		Ok(result) => println!("{} is {}", result.name, result.age),
+		Err(result) => println!("{}", result)
+	}
 }
