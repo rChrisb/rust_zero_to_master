@@ -13,11 +13,11 @@ fn get_choice(input: &str) -> Result<MenuChoice, String> {
 		_ => Err("menu choice not found.".to_owned())
 	}
 }
-
+fn pick_choice(input: &str) -> Result<(), String> {
+	let choice = get_choice(input)?;
+	println!("choice: {:?}", choice);
+	Ok(())
+}
 fn main () {
-	let choice = get_choice("damn");
-	match choice {
-		Ok(menu) => println!("choice : {:?}", menu),
-		Err(menu) => println!("{:?}", menu)
-	}
+	pick_choice("start");
 }

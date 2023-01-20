@@ -17,5 +17,6 @@ fn main() {
 	let second_string_to_transform = "NICE TO MEET YOU !!";
 	println!("UPPERCASE TEST: {} ===>>> {}", string_to_transform, string_to_transform.to_uppercase());
 	println!("lowercase test: {} ===>>> {}", second_string_to_transform, second_string_to_transform.to_lowercase());
+	println!("{}", second_string_to_transform);
 
 }
