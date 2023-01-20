@@ -23,5 +23,15 @@ fn main(){
 		Discount::Flat(amount) => println!("{}", amount),
 		_ => ()
 	}
+	let concert = Ticket {
+		event: "concert".to_owned(),
+		price: 45
+	};
+	match concert {
+		Ticket {price, ..} => println!("You are going to a concert, the price is {}", price),
+		Ticket {price: 45, event} => println!("the price of your event is {}", concert.price)
+	}
+
+
 
 }
