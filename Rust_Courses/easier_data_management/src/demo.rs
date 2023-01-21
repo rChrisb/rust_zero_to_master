@@ -9,10 +9,16 @@ enum Color {
     Blue,
 }
 fn main() {
-    let color = Color::Red;
-    if let Color::Red = color {
-        println!("Red is the best color!")
+    let array = vec![1, 2, 3, 4];
+    let mut iter_number = array.iter();
+    while let Some(value) = iter_number.next() {
+        println!("value: {}", value);
     }
+
+    // let color = Color::Red;
+    // if let Color::Red = color {
+    //     println!("Red is the best color!")
+    // }
 
     /* let range = 'a'..'z'; //range DOESN'T include letter 'z'
     let another_range = 'a'..='z'; //range INCLUDES letter 'z'
