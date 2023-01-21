@@ -3,21 +3,43 @@
 // }
 // fn maybe_num() -> Option<i32> {...}
 // fn maybe_word() -> Option<String> {...}
+#[allow(dead_code)]
+enum Color {
+    Red,
+    Blue,
+}
 fn main() {
-    let numbers = vec![1, 2, 3, 4];
+    let color = Color::Red;
+    if let Color::Red = color {
+        println!("Red is the best color!")
+    }
+
+    /* let range = 'a'..'z'; //range DOESN'T include letter 'z'
+    let another_range = 'a'..='z'; //range INCLUDES letter 'z'
+    for letter in range {
+        println!("{}", letter);
+    }
+    println!(
+        "--------------------------------------------\n--------------------------------------------\n"
+    );
+    for letter in another_range {
+        println!("{}", letter);
+    } */
+
+    /*   let numbers = vec![1, 2, 3, 4]; */
 
     /*   let mut plus_one = vec![];
     for num in numbers {
         plus_one.push(num + 1);
     } */
-    let plus_one: Vec<_> = numbers
-        .iter()
-        .map(|num| num + 1)
-        .filter(|num| num % 2 == 0)
-        /*    .last(); */
-        /* .take(1) */
-        .collect();
-    println!("{:?}", plus_one)
+    // let plus_one: Vec<_> = numbers
+    //     .iter()
+    //     .map(|num| num + 1)
+    //     .filter(|num| num % 2 == 0)
+    //     /*    .last(); */
+    //     /* .take(1) */
+    //     .collect();
+    // println!("{:?}", plus_one)
 
     /* let a: Option<i32> = Some(7);
 	let a_is_some = a.is_some();
