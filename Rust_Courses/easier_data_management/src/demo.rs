@@ -1,15 +1,18 @@
-fn add(a:i32, b:i32) -> i32 {
-	a + b
-}
-
+// fn add(a:i32, b:i32) -> i32 {
+// 	a + b
+// }
+fn maybe_num() -> Option<i32> {...}
+fn maybe_word() -> Option<String> {...}
 fn main () {
-	let sum_1 = add(3,5);
-	println!("{sum_1}");
 
-	let mul = |a:i32, b:i32 | ->i32 {
-		a * b
-	};
-	let div = |a, b| a/b;
-	println!("{:?}", mul(5, 4));
-	println!("{:?}", div(8, 2));
+	
+	// let sum_1 = add(3,5);
+	// println!("{sum_1}");
+
+	// let mul = |a:i32, b:i32 | ->i32 {
+	// 	a * b
+	// };
+	// let div = |a, b| a/b;
+	// println!("{:?}", mul(5, 4));
+	// println!("{:?}", div(8, 2));
 }
