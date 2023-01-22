@@ -38,17 +38,17 @@ fn get_input() -> io::Result<String> {
 }
 fn power_message(keyword: Keywords) {
     match keyword {
-        Keywords::Off => println!("Turning OFF"),
-        Keywords::Sleep => println!("Sleep mode"),
-        Keywords::Reboot => println!("Rebooting"),
-        Keywords::Shutdown => println!("Shutting Donw"),
-        Keywords::Hibernate => println!("Hibernate mode"),
+        Keywords::Off => println!("\t\tTurning OFF. . . ."),
+        Keywords::Sleep => println!("\t\tSleep mode. . . ."),
+        Keywords::Reboot => println!("\t\tRebooting. . . ."),
+        Keywords::Shutdown => println!("\t\tShutting Down. . . ."),
+        Keywords::Hibernate => println!("\t\tHibernate mode. . . ."),
     }
 }
 
 fn main() {
+    println!("Enter a keyword:");
     let user_input = get_input().unwrap().to_lowercase();
-
     match user_input.as_str() {
         "off" => power_message(Keywords::Off),
         "sleep" => power_message(Keywords::Sleep),
