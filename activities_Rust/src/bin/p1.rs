@@ -48,6 +48,29 @@ fn add_bill(name: &str, amount: f64, mut bills: Vec<Bill>) -> Vec<Bill> {
         amount_owed: amount,
     };
     bills.push(new_bill);
+    println!("----------Bills have been updated------\n");
+    return bills;
+}
+
+fn remove_bill(name: &str, amount: f64, mut bills: Vec<Bill>) -> Vec<Bill> {
+    bills.retain(|bill| bill.name != name && bill.amount_owed != amount);
+    println!("----------Bills have been updated------\n");
+    return bills;
+}
+fn edit_bill(
+    mut bills: Vec<Bill>,
+    name: &str,
+    amount: f64,
+    new_name: &str,
+    new_amount: f64
+) -> Vec<Bill> {
+    for bill in bills.iter_mut() {
+        if bill.name == name && bill.amount_owed == amount {
+            bill.name = new_name.to_owned();
+            bill.amount_owed = new_amount;
+        }
+    }
+    println!("----------Bills have been updated------\n");
     return bills;
 }
 
@@ -58,10 +81,6 @@ fn see_bills(bills: &Vec<Bill>) {
         bill_number += 1;
     }
 }
-fn remove_bill(name: &str, amount: f64, mut bills: Vec<Bill>) -> Vec<Bill> {
-    bills.retain(|bill| bill.name != name && bill.amount_owed != amount);
-    return bills;
-}
 
 fn main() {
     let mut bills: Vec<Bill> = Vec::new();
@@ -71,4 +90,9 @@ fn main() {
     see_bills(&bills);
     bills = remove_bill("Hector", 425.23, bills);
     see_bills(&bills);
+    bills = edit_bill(bills, "Victor", 2000.0, "Maxime", 4000.0);
+    see_bills(&bills);
+    bills = add_bill("Rubie", 45200.25, bills);
+    bills = add_bill("Bikoy", 3455.5, bills);
+    see_bills(&bills)
 }
