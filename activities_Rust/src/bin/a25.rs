@@ -19,7 +19,7 @@ struct Square {
 }
 impl Perim for Square {
     fn perimeter(&self) {
-        println!("{:?}", self.side * 4.0);
+        println!("square perimeter: {:?}", self.side * 4.0);
     }
 }
 struct Triangle {
@@ -29,7 +29,7 @@ struct Triangle {
 }
 impl Perim for Triangle {
     fn perimeter(&self) {
-        println!("{:?}", self.a + self.b + self.c);
+        println!("triangle perimeter: {:?}", self.a + self.b + self.c);
     }
 }
 fn print_perim(figure: impl Perim) {
