@@ -36,6 +36,7 @@ enum MenuAction {
     GoBack,
 }
 use std::io;
+use std::collections::HashMap;
 
 fn get_input() -> Option<String> {
     let mut buffer = String::new();
@@ -95,22 +96,34 @@ pub struct Bill {
 }
 
 pub struct Bills {
-    inner: Vec<Bill>,
+    inner: HashMap<String, Bill>,
 }
 
 impl Bills {
     fn new() -> Self {
         Self {
-            inner: vec![],
+            inner: HashMap::new(),
         }
     }
 
     fn add(&mut self, bill: Bill) {
-        self.inner.push(bill);
+        self.inner.insert(bill.name.to_string(), bill);
     }
 
     fn get_all(&self) -> Vec<&Bill> {
-        self.inner.iter().collect()
+        self.inner.values().collect()
+    }
+    fn remove(&mut self, name: &str) -> bool {
+        self.inner.remove(name).is_some()
+    }
+    fn update(&mut self, name: &str, amount: f64) -> bool {
+        match self.inner.get_mut(name) {
+            Some(bill) => {
+                bill.amount = amount;
+                true
+            }
+            None => false,
+        }
     }
 }
 mod menu {
@@ -139,6 +152,46 @@ mod menu {
     pub fn view_all_bills(bills: &Bills) {
         for bill in bills.get_all() {
             println!("{:?}", bill);
+        }
+    }
+    pub fn remove_bill(bills: &mut Bills) {
+        for bill in bills.get_all() {
+            println!("{:?}", bill);
+        }
+        println!("Enter bill name to remove");
+        let name = match get_input() {
+            Some(name) => name,
+            None => {
+                return;
+            }
+        };
+        if bills.remove(&name) {
+            println!("Bill removed")
+        } else {
+            println!("Bill not found")
+        }
+    }
+    pub fn update_bill(bills: &mut Bills) {
+        for bill in bills.get_all() {
+            println!("{:?}", bill);
+        }
+        println!("Enter the bill you want to update:");
+        let name = match get_input() {
+            Some(name) => name,
+            None => {
+                return;
+            }
+        };
+        let amount = match get_bill_amount() {
+            Some(amount) => amount,
+            None => {
+                return;
+            }
+        };
+        if bills.update(&name, amount) {
+            println!("Bill updated")
+        } else {
+            println!("Bill not found")
         }
     }
 }
@@ -177,24 +230,27 @@ mod menu {
 //         bill_number += 1;
 //     }
 // }
-
-fn main() {
+fn run_program() -> Option<()> {
     let mut bills = Bills::new();
     loop {
         MenuAction::show();
-        let input = get_input().expect("no data entered");
+        let input = get_input()?;
         match MenuAction::from_str(input.as_str()) {
             Some(MenuAction::Add) => menu::add_bill(&mut bills),
             Some(MenuAction::View) => menu::view_all_bills(&bills),
-            Some(MenuAction::Remove) => (),
-            Some(MenuAction::Update) => (),
+            Some(MenuAction::Remove) => menu::remove_bill(&mut bills),
+            Some(MenuAction::Update) => menu::update_bill(&mut bills),
             Some(MenuAction::GoBack) => (),
 
             None => {
-                return;
+                break;
             }
         }
     }
+    None
+}
+fn main() {
+    run_program();
 
     /* let mut bills: Vec<Bill> = Vec::new();
     bills = add_bill("Victor", 2000.0, bills);
