@@ -18,6 +18,9 @@ enum ServicePriority {
 trait Priority {
     fn get_priority(&self) -> ServicePriority;
 }
+fn priority<T>(person: T) where T: Priority + std::fmt::Debug {
+    println!("{:?}: {:?} priority", person, person.get_priority())
+}
 
 #[derive(Debug)]
 struct ImportantGuest;
@@ -25,4 +28,18 @@ impl Priority for ImportantGuest {
     fn get_priority(&self) -> ServicePriority {
         ServicePriority::High
     }
+}
+#[derive(Debug)]
+struct Guest;
+impl Priority for Guest {
+    fn get_priority(&self) -> ServicePriority {
+        ServicePriority::Standard
+    }
+}
+
+fn main() {
+    let leo = ImportantGuest;
+    let cris = Guest;
+    priority(leo);
+    priority(cris)
 }
