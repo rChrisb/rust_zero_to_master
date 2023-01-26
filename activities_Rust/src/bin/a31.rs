@@ -68,5 +68,5 @@ fn main() {
     let materials: Vec<Box<dyn Material>> = vec![carpet, tile, wood];
     let total = calculate_cost(&materials);
 
-    println!("cost =${}", total)
+    println!("cost = ${}", total)
 }
