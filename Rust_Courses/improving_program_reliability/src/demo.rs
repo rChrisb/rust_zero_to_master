@@ -120,7 +120,7 @@ fn main() {
     }
     let hawk = Bird { age: 21, species: Species::Parrot };
     match hawk {
-        Bird { age: 4, .. } => println!("4 year old bird"),
+        Bird { age: 4..=10, .. } => println!("bird'age is between 4 and 10 years old"),
         Bird { species: Species::Parrot, .. } => println!("this bird is a Parrot"),
         Bird { .. } => println!("a bird"),
     }
