@@ -34,23 +34,78 @@
 //         }
 //     }
 // }
-#[derive(Debug, Clone, Copy)]
-struct NeverZero(i32);
-impl NeverZero {
-    fn new(i: i32) -> Result<Self, String> {
-        if i == 0 { Err("can NOT be zero".to_owned()) } else { Ok(Self(i)) }
+// #[derive(Debug, Clone, Copy)]
+// struct NeverZero(i32);
+// impl NeverZero {
+//     fn new(i: i32) -> Result<Self, String> {
+//         if i == 0 { Err("can NOT be zero".to_owned()) } else { Ok(Self(i)) }
+//     }
+// }
+// fn divide(a: i32, b: NeverZero) -> i32 {
+//     let b = b.0;
+//     a / b
+// }
+struct Employee<State> {
+    name: String,
+    state: State,
+}
+impl<State> Employee<State> {
+    fn transition<NextState>(self, state: NextState) -> Employee<NextState> {
+        Employee {
+            name: self.name,
+            state: state,
+        }
     }
 }
-fn divide(a: i32, b: NeverZero) -> i32 {
-    let b = b.0;
-    a / b
+struct Agreement;
+struct Signature;
+struct Training;
+struct FailedTraining {
+    score: u8,
+}
+#[allow(dead_code)]
+struct OnboardingComplete {
+    score: u8,
+}
+
+impl Employee<Agreement> {
+    fn new(name: &str) -> Self {
+        Self {
+            name: name.to_string(),
+            state: Agreement,
+        }
+    }
+    fn read_agreement(self) -> Employee<Signature> {
+        self.transition(Signature)
+    }
+}
+impl Employee<Signature> {
+    fn sign(self) -> Employee<Training> {
+        self.transition(Training)
+    }
+}
+#[rustfmt::skip]
+impl Employee<Training> {
+    fn train(self, score: u8) -> Result<Employee<OnboardingComplete>, Employee<FailedTraining>> {
+        if score >= 7 {
+            Ok(self.transition(OnboardingComplete {score}))
+        } else {
+            Err(self.transition(FailedTraining {score}))
+        }
+    }
 }
 
 fn main() {
-    match NeverZero::new(10) {
-        Ok(nevzero) => println!("{:?}", divide(10, nevzero)),
-        Err(e) => println!("{:?}", e),
+    let employee = Employee::new("Sarah");
+    let onboarded = employee.read_agreement().sign().train(10);
+    match onboarded {
+        Ok(emp) => println!("onboarding complete, score: {}", emp.state.score),
+        Err(emp) => println!("training failed, score: {}", emp.state.score),
     }
+    // match NeverZero::new(10) {
+    //     Ok(nevzero) => println!("{:?}", divide(10, nevzero)),
+    //     Err(e) => println!("{:?}", e),
+    // }
     // let pass_status = swipe_card().and_then(|mut pass| use_pass(&mut pass, 3));
     // match pass_status {
     //     Ok(_) => println!("Ok to board!"),
