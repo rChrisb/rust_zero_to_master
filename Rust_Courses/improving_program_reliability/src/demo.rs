@@ -94,36 +94,36 @@ struct OnboardingComplete {
 //         }
 //     }
 // }
-enum Status {
-    Error(i32),
-    Info,
-    Warn,
-}
-enum Species {
-    Finch,
-    Hawk,
-    Parrot,
-}
-struct Bird {
-    age: usize,
-    species: Species,
-}
+// enum Status {
+//     Error(i32),
+//     Info,
+//     Warn,
+// }
+// enum Species {
+//     Finch,
+//     Hawk,
+//     Parrot,
+// }
+// struct Bird {
+//     age: usize,
+//     species: Species,
+// }
 fn main() {
-    let status = status::Error(5);
-    match status {
-        Status::Error(s @ 2) => println!("error three"),
-        Status::Error(s @ 5..=10) => println!("error 5 through 10"),
-        Status::Error(s @ 18 | s @ 20) => println!("error 18 or 20"),
-        Status::Error(s) => println!("error"),
-        Status::Info => println!("info"),
-        Status::Warn => println!("warn"),
-    }
-    let hawk = Bird { age: 21, species: Species::Parrot };
-    match hawk {
-        Bird { age: 4..=10, .. } => println!("bird'age is between 4 and 10 years old"),
-        Bird { species: Species::Parrot, .. } => println!("this bird is a Parrot"),
-        Bird { .. } => println!("a bird"),
-    }
+    // let status = status::Error(5);
+    // match status {
+    //     Status::Error(s @ 2) => println!("error two"),
+    //     Status::Error(s @ 5..=10) => println!("error 5 through 10"),
+    //     Status::Error(s @ 18 | s @ 20) => println!("error 18 or 20"),
+    //     Status::Error(s) => println!("error"),
+    //     Status::Info => println!("info"),
+    //     Status::Warn => println!("warn"),
+    // }
+    // let hawk = Bird { age: 21, species: Species::Parrot };
+    // match hawk {
+    //     Bird { age: 4..=10, .. } => println!("bird'age is between 4 and 10 years old"),
+    //     Bird { species: Species::Parrot, .. } => println!("this bird is a Parrot"),
+    //     Bird { .. } => println!("a bird"),
+    // }
     // let employee = Employee::new("Sarah");
     // let onboarded = employee.read_agreement().sign().train(10);
     // match onboarded {
