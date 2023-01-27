@@ -68,41 +68,69 @@ struct OnboardingComplete {
     score: u8,
 }
 
-impl Employee<Agreement> {
-    fn new(name: &str) -> Self {
-        Self {
-            name: name.to_string(),
-            state: Agreement,
-        }
-    }
-    fn read_agreement(self) -> Employee<Signature> {
-        self.transition(Signature)
-    }
+// impl Employee<Agreement> {
+//     fn new(name: &str) -> Self {
+//         Self {
+//             name: name.to_string(),
+//             state: Agreement,
+//         }
+//     }
+//     fn read_agreement(self) -> Employee<Signature> {
+//         self.transition(Signature)
+//     }
+// }
+// impl Employee<Signature> {
+//     fn sign(self) -> Employee<Training> {
+//         self.transition(Training)
+//     }
+// }
+// #[rustfmt::skip]
+// impl Employee<Training> {
+//     fn train(self, score: u8) -> Result<Employee<OnboardingComplete>, Employee<FailedTraining>> {
+//         if score >= 7 {
+//             Ok(self.transition(OnboardingComplete {score}))
+//         } else {
+//             Err(self.transition(FailedTraining {score}))
+//         }
+//     }
+// }
+enum Status {
+    Error(i32),
+    Info,
+    Warn,
 }
-impl Employee<Signature> {
-    fn sign(self) -> Employee<Training> {
-        self.transition(Training)
-    }
+enum Species {
+    Finch,
+    Hawk,
+    Parrot,
 }
-#[rustfmt::skip]
-impl Employee<Training> {
-    fn train(self, score: u8) -> Result<Employee<OnboardingComplete>, Employee<FailedTraining>> {
-        if score >= 7 {
-            Ok(self.transition(OnboardingComplete {score}))
-        } else {
-            Err(self.transition(FailedTraining {score}))
-        }
-    }
+struct Bird {
+    age: usize,
+    species: Species,
 }
-
 fn main() {
-    let employee = Employee::new("Sarah");
-    let onboarded = employee.read_agreement().sign().train(10);
-    match onboarded {
-        Ok(emp) => println!("onboarding complete, score: {}", emp.state.score),
-        Err(emp) => println!("training failed, score: {}", emp.state.score),
+    let status = status::Error(5);
+    match status {
+        Status::Error(s @ 2) => println!("error three"),
+        Status::Error(s @ 5..=10) => println!("error 5 through 10"),
+        Status::Error(s @ 18 | s @ 20) => println!("error 18 or 20"),
+        Status::Error(s) => println!("error"),
+        Status::Info => println!("info"),
+        Status::Warn => println!("warn"),
     }
-    // match NeverZero::new(10) {
+    let hawk = Bird { age: 21, species: Species::Parrot };
+    match hawk {
+        Bird { age: 4, .. } => println!("4 year old bird"),
+        Bird { species: Species::Parrot, .. } => println!("this bird is a Parrot"),
+        Bird { .. } => println!("a bird"),
+    }
+    // let employee = Employee::new("Sarah");
+    // let onboarded = employee.read_agreement().sign().train(10);
+    // match onboarded {
+    //     Ok(emp) => println!("onboarding complete, score: {}", emp.state.score),
+    //     Err(emp) => println!("training failed, score: {}", emp.state.score),
+    // }
+    // // match NeverZero::new(10) {
     //     Ok(nevzero) => println!("{:?}", divide(10, nevzero)),
     //     Err(e) => println!("{:?}", e),
     // }
