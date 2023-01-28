@@ -9,6 +9,7 @@ edition = "2021"
 chrono = "0.4.23"
 thiserror = "1.0"
 crossbeam-channel = "*"
+colored = "*"
 
 [lib]
 name = "activity"
