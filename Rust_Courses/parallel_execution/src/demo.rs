@@ -1,14 +1,18 @@
 use std::thread;
 use std::time::Duration;
 fn main() {
-    let value = thread::spawn(move || {
-        thread::sleep(Duration::from_secs(2));
-        65
+    let data = vec!['a', 'b', 'c', 'd'];
+    let caps = thread::spawn(move || {
+        let data: Vec<_> = data
+            .iter()
+            .map(|character| character.to_ascii_uppercase())
+            .collect();
+        data
     });
     println!("Waiting on thread");
 
-    match value.join() {
-        Ok(num) => println!("{}", num),
+    match caps.join() {
+        Ok(num) => println!("{:?}", num),
         Err(num) => println!("{:?}", num),
     }
     // let iterations = 10;
