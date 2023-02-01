@@ -1,4 +1,4 @@
-use super::ClipError;
+use crate::domain::clip::ClipError;
 use serde::{ Deserialize, Serialize };
 use std::str::FromStr;
 
@@ -10,7 +10,7 @@ impl Password {
         let password: Option<String> = password.into();
         match password {
             Some(password) => {
-                if !password.trim.is_empty() { Ok(Self(Some(password))) } else { Ok(Self(None)) }
+                if !password.trim().is_empty() { Ok(Self(Some(password))) } else { Ok(Self(None)) }
             }
             None => Ok(Self(None)),
         }
