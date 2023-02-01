@@ -27,6 +27,7 @@ impl ShortCode {
         self.0
     }
 }
+
 impl Default for ShortCode {
     fn default() -> Self {
         Self::new()
