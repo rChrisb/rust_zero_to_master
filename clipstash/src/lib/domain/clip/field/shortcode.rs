@@ -26,28 +26,27 @@ impl ShortCode {
     pub fn into_inner(self) -> String {
         self.0
     }
-
-    impl Default for ShortCode {
-        fn default() -> Self {
-            Self::new()
-        }
+}
+impl Default for ShortCode {
+    fn default() -> Self {
+        Self::new()
     }
+}
 
-    impl From<ShortCode> for String {
-        fn from(shortcode: ShortCode) -> Self {
-            shortcode.0
-        }
+impl From<ShortCode> for String {
+    fn from(shortcode: ShortCode) -> Self {
+        shortcode.0
     }
-    impl From<&str> for ShortCode {
-        fn from(shortcode: &str) -> Self {
-            ShortCode(shortcode.to_owned())
-        }
+}
+impl From<&str> for ShortCode {
+    fn from(shortcode: &str) -> Self {
+        ShortCode(shortcode.to_owned())
     }
+}
 
-    impl FromStr for ShortCode {
-        type Err = ClipError;
-        fn from_str(s: &str) -> Result<Self, Self::Err> {
-            Ok(Self(s.into()))
-        }
+impl FromStr for ShortCode {
+    type Err = ClipError;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(Self(s.into()))
     }
 }
