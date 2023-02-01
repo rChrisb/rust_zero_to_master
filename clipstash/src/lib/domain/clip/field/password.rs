@@ -23,7 +23,7 @@ impl Password {
     }
 }
 
-impl Defaukt for Password {
+impl Default for Password {
     fn default() -> Self {
         Self(None)
     }
