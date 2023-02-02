@@ -19,8 +19,9 @@ impl TryFrom<Clip> for crate::domain::Clip {
     type Error = ClipError;
     fn try_from(clip: Clip) -> Result<Self, Self::Error> {
         use crate::domain::clip::field;
+        use std::str::FromStr;
         Ok(Self {
-            clip_id: field::ClipId::new(DbId::try_from(clip.clip_id.as_str())?),
+            clip_id: field::ClipId::new(DbId::from_str(clip.clip_id.as_str())?),
             shortcode: field::ShortCode::from(clip.shortcode),
             content: field::Content::new(clip.content.as_str())?,
             title: field::Title::new(clip.title),
