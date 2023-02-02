@@ -1,5 +1,5 @@
 use crate::data::DbId;
-use crate::{ ClipError, Short, Time };
+use crate::{ ClipError, ShortCode, Time };
 use chrono::{ NaiveDateTime, Utc };
 use std::convert::TryFrom;
 
@@ -25,7 +25,7 @@ impl TryFrom<Clip> for crate::domain::Clip {
             shortcode: field::ShortCode::from(clip.shortcode),
             content: field::Content::new(clip.content.as_str())?,
             title: field::Title::new(clip.title),
-            posted: field::Posted::new(Time::from_naive_ut(clip.posted)),
+            posted: field::Posted::new(Time::from_naive_utc(clip.posted)),
             expires: field::Expires::new(clip.expires.map(Time::from_naive_utc)),
             password: field::Password::new(clip.password.unwrap_or_default())?,
             hits: field::Hits::new(u64::try_from(clip.hits)?),
