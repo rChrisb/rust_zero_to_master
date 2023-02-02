@@ -8,7 +8,7 @@ pub trait PageContext {
 }
 
 #[derive(Debug, Serialize)]
-pub struct Hoe {}
+pub struct Home {}
 
 impl Default for Home {
     fn default() -> Self {
