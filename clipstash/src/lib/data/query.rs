@@ -63,7 +63,7 @@ pub async fn update_clip<M: Into<model::UpdateClip>>(
             model.expires,
             model.password,
             model.title,
-			model.shortcode
+            model.shortcode
         ).execute(
             pool
         ).await?;
