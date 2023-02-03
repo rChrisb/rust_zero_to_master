@@ -5,7 +5,7 @@ use crate::web::{ ctx, form, renderer::Renderer, PageError };
 use crate::{ ServiceError, ShortCode };
 use rocket::form::{ Contextual, Form };
 use rocket::http::{ Cookie, CookieJar, Status };
-use rocket::response::content::Html;
+use rocket::response::content::Html; // cargo check error: "no Html in content"  ??????
 use rocket::response::{ status, Redirect };
 use rocket::{ uri, State };
 
