@@ -37,6 +37,6 @@ impl FromStr for Title {
 #[rocket::async_trait]
 impl<'r> FromFormField<'r> for Title {
     fn from_value(field: ValueField<'r>) -> form::Result<'r, Self> {
-        Ok(Self::new(field.value).map_err(|e| form::Error::validataion(format!("{}", e)))?)
+        Ok(Self::new(field.value.to_owned()))
     }
 }
