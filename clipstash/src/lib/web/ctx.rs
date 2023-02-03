@@ -28,7 +28,7 @@ impl PageContext for Home {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Constructor)]
 pub struct ViewClip {
     pub clip: crate::Clip,
 }
