@@ -9,6 +9,7 @@ use rocket::response::content::Html;
 use rocket::response::{ status, Redirect };
 use rocket::{ uri, State };
 
+#[rocket::get("/")]
 fn home(renderer: &State<Renderer<'_>>) -> Html<String> {
     let context = ctx::Home::default();
     Html(renderer.render(context, &[]))
