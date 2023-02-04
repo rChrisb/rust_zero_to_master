@@ -199,6 +199,6 @@ pub mod catcher {
     }
 
     pub fn catchers() -> Vec<Catcher> {
-        catchers![not_found, default, internal_error]
+        catchers![not_found, default, internal_error, request_error, missing_api_key]
     }
 }
