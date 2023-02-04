@@ -28,6 +28,10 @@ fn main() {
         hit_counter,
     };
 
+    rt.block_on(async move {
+        clipstash::rocket(config).launch().await.expect("failed to launch rocket server")
+    });
+
     //     clipstash::rocket(config).launch().await.expect("failed to launch rocket server")
     // });
 }
