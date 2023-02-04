@@ -89,7 +89,7 @@ pub async fn update_clip<M: Into<model::UpdateClip>>(
     get_clip(model.shortcode, pool).await
 }
 
-pub async fn save_api_key(api_key: Apikey, pool: &DatabasePool) -> Result<Apikey> {
+pub async fn save_api_key(api_key: ApiKey, pool: &DatabasePool) -> Result<ApiKey> {
     let bytes = api_key.clone().into_inner();
     let _ = sqlx::query!("INSERT INTO api_keys (api_key) VALUES (?)", bytes)
         .execute(pool)
@@ -103,7 +103,7 @@ pub enum RevocationStatus {
     NotFound
 }
 
-pub async fn revoke_api_key(api_key: Apikey, pool: &DatabasePool) -> Result<RevocationStatus> {
+pub async fn revoke_api_key(api_key: ApiKey, pool: &DatabasePool) -> Result<RevocationStatus> {
     let bytes = api_key.clone().into_inner();
     Ok(
         sqlx::query!("DELETE FROM api_keys WHERE api_key = ?", bytes)
