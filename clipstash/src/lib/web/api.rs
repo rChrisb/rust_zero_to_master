@@ -22,9 +22,9 @@ pub enum ApiKeyError {
 }
 
 #[derive(Debug, Clone)]
-pub struct Apikey(Vec<u8>);
+pub struct ApiKey(Vec<u8>);
 
-impl Apikey {
+impl ApiKey {
     pub fn to_base64(&self) -> String {
         base64::encode(self.0.as_slice())
     }
@@ -33,19 +33,19 @@ impl Apikey {
     }
 }
 
-impl Default for Apikey {
+impl Default for ApiKey {
     fn default() -> Self {
         let key = (0..16).map(|_| rand::random::<u8>()).collect();
         Self(key)
     }
 }
 
-impl FromStr for Apikey {
+impl FromStr for ApiKey {
     type Err = ApiKeyError;
     fn from_str(key: &str) -> Result<Self, Self::Err> {
         base64
             ::decode(key)
-            .map(Apikey)
+            .map(ApiKey)
             .map_err(|e| Self::Err::DecodeError(e.to_string()))
     }
 }
