@@ -148,7 +148,7 @@ pub async fn submit_clip_password(
 pub async fn get_raw_clip(
     cookies: &CookieJar<'_>,
     shortcode: ShortCode,
-    hit_counter: &State<AppDatabase>,
+    hit_counter: &State<HitCounter>,
     database: &State<AppDatabase>
 ) -> Result<status::Custom<String>, Status> {
     use crate::domain::clip::field::Password;
