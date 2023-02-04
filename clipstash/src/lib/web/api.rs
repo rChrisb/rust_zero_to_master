@@ -116,6 +116,7 @@ impl<'r> FromRequest<'r> for ApiKey {
     }
 }
 
+#[rocket::post("/key")]
 pub async fn new_api_key(database: &State<AppDatabase>) -> Result<Json<&str>, ApiError> {
     let api_key = action::generate_api_key(database.get_pool()).await?;
     println!("Api Key: {}", api_key.to_base64());
@@ -149,7 +150,8 @@ pub async fn get_clip(
 #[rocket::post("/", data = "<req>")]
 pub async fn new_clip(
     req: Json<service::ask::NewClip>,
-    database: &State<AppDatabase>
+    database: &State<AppDatabase>,
+    _api_key: ApiKey
 ) -> Result<Json<crate::Clip>, ApiError> {
     let clip = action::new_clip(req.into_inner(), database.get_pool()).await?;
     Ok(Json(clip))
@@ -158,7 +160,8 @@ pub async fn new_clip(
 #[rocket::post("/", data = "<req>")]
 pub async fn update_clip(
     req: Json<service::ask::UpdateClip>,
-    database: &State<AppDatabase>
+    database: &State<AppDatabase>,
+    _api_key: ApiKey
 ) -> Result<Json<crate::Clip>, ApiError> {
     let clip = action::update_clip(req.into_inner(), database.get_pool()).await?;
     Ok(Json(clip))
