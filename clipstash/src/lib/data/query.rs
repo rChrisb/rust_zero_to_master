@@ -5,6 +5,21 @@ use sqlx::Row;
 
 type Result<T> = std::result::Result<T, DataError>;
 
+pub async fn increase_hit_count(
+    shortcode: &ShortCode,
+    hits: u32,
+    pool: &DatabasePool
+) -> Result<()> {
+    let shortcode = shortcode.as_str();
+    Ok(
+        sqlx::query!("UPDATE clips SET hits = hits + ? WHERE shortcode = ?",
+            hits,
+            shortcode)
+            .execute(pool).await
+            .map (|_| ())?
+    )
+}
+
 pub async fn get_clip<M: Into<model::GetClip>>(
     model: M,
     pool: &DatabasePool
@@ -12,7 +27,8 @@ pub async fn get_clip<M: Into<model::GetClip>>(
     let model = model.into();
     let shortcode = model.shortcode.as_str();
     Ok(
-        sqlx::query_as!(model::Clip, "SELECT * FROM clips WHERE shortcode = ?", shortcode)
+        sqlx
+            ::query_as!(model::Clip, "SELECT * FROM clips WHERE shortcode = ?", shortcode)
             .fetch_one(pool).await?
     )
 }
@@ -22,7 +38,8 @@ pub async fn new_clip<M: Into<model::NewClip>>(
     pool: &DatabasePool
 ) -> Result<model::Clip> {
     let model = model.into();
-    let _ = sqlx::query!(
+    let _ = sqlx
+        ::query!(
             r#"INSERT INTO clips (
 			clip_id,
 			shortcode,
@@ -51,8 +68,8 @@ pub async fn update_clip<M: Into<model::UpdateClip>>(
     pool: &DatabasePool
 ) -> Result<model::Clip> {
     let model = model.into();
-    let _ =
-        sqlx::query!(
+    let _ = sqlx
+        ::query!(
             r#"UPDATE clips SET
 		content = ?,
 		expires = ?,
@@ -64,8 +81,7 @@ pub async fn update_clip<M: Into<model::UpdateClip>>(
             model.password,
             model.title,
             model.shortcode
-        ).execute(
-            pool
-        ).await?;
+        )
+        .execute(pool).await?;
     get_clip(model.shortcode, pool).await
 }
