@@ -39,7 +39,7 @@ impl HitCounter {
                 .iter()
                 .map(|(k, v)| (k.clone(), *v))
                 .collect();
-            hit.clear();
+            hits.clear();
             hits_vec
         };
         handle.block_on(async move {
