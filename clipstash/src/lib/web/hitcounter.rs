@@ -71,7 +71,7 @@ impl HitCounter {
     }
     pub fn new(pool: DatabasePool, handle: Handle) -> Self {
         let (tx, rx) = unbounded();
-        let tw_clone = tx.clone();
+        let tx_clone = tx.clone();
         let rx_clone = rx.clone();
 
         let _ = std::thread::spawn(move || {
@@ -90,7 +90,16 @@ impl HitCounter {
                     {
                         eprintln!("message processing error: {}", e);
                     }
-                    Err(e) => todo!(),
+                    Err(e) => match e {
+						TryRecvError::Empty => {
+							std::thread::sleep(Duration::from_secs(5));
+							if let Err(e) = tx_clone.send(HitCountMsg::Commit) {
+								eprintln!("error sending commit msg to hits channel: {}", e);
+
+							}
+						}
+						_ => break,
+					}
                 }
             }
         });
