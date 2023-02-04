@@ -58,7 +58,7 @@ pub async fn new_clip(
             .collect::<Vec<_>>();
         Err((
             Status::BadRequest,
-            Html(renderer.render_with_data(ctx::Home::default(), ("clip", &form.context), &error)),
+            Html(renderer.render_with_data(ctx::Home::default(), ("clip", &form.context), &errors)),
         ))
     }
 }
@@ -93,7 +93,7 @@ pub async fn get_clip(
     }
 }
 pub fn routes() -> Vec<rocket::Route> {
-    rocket::routes![home, get_clip]
+    rocket::routes![home, get_clip, new_clip]
 }
 
 pub mod catcher {
