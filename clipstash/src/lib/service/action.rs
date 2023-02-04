@@ -11,7 +11,7 @@ pub async fn end_transaction(transaction: Transaction<'_>) -> Result<(), Service
 }
 
 pub async fn increase_hit_count(
-    short: &ShortCode,
+    shortcode: &ShortCode,
     hits: u32,
     pool: &DatabasePool
 ) -> Result<(), ServiceError> {
