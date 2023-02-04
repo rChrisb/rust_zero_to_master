@@ -1,5 +1,5 @@
 use crate::data::DatabasePool;
-use crate::domain::ShortCode;
+use crate::ShortCode;
 use crate::service::{ self, ServiceError };
 use crossbeam_channel::TryRecvError;
 use crossbeam_channel::{ unbounded, Receiver, Sender };
