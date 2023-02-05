@@ -51,8 +51,8 @@ pub mod test {
             maintenance,
         }
     }
-    pub fn client() -> Clien {
+    pub fn client() -> Client {
         let config = config();
-        Client::tracked(crate::rocket(config)).expect("failed to build rocket instance");
+        Client::tracked(crate::rocket(config)).expect("failed to build rocket instance")
     }
 }
