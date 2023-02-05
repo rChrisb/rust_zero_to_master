@@ -80,7 +80,7 @@ fn run(op: Opt) -> Result<(), Box<dyn Error>> {
                 shortcode,
             };
             let clip = get_clip(opt.addr.as_str(), req, opt.api_key)?;
-            println!("{:#?}", clip)
+            println!("{:#?}", clip);
         }
         Command::New { clip, password, expires, title } => {
             let req = NewClip {
@@ -90,7 +90,7 @@ fn run(op: Opt) -> Result<(), Box<dyn Error>> {
                 password: password.unwrap_or_default(),
             };
             let clip = new_clip(opt.addr.as_str(), req, opt.api_key)?;
-            println!("{:#?}", clip)
+            println!("{:#?}", clip);
         }
         Command::Update { clip, password, expires, title, shortcode } => {}
     }
