@@ -264,5 +264,11 @@ pub mod test {
             .cookie(Cookie::new("password", "123"))
             .dispatch();
         assert_eq!(response.status(), Status::Ok);
+
+        let response = client
+            .get(format!("/clip/raw/{}", clip.shortcode.as_str()))
+            .cookie(Cookie::new("password", "abc"))
+            .dispatch();
+        assert_eq!(response.status(), Status::Unauthorized);
     }
 }
