@@ -225,4 +225,44 @@ pub mod test {
         let response = client.get("/clip/aasldfjkasldgkj").dispatch();
         assert_eq!(response.status(), Status::NotFound);
     }
+
+    #[test]
+    fn requires_password_when_applicable() {
+        use crate::domain::field::{ Content, Expires, Password, Title };
+        use crate::service;
+        use rocket::http::{ ContentType, Cookie };
+
+        let rt = async_runtime();
+
+        let client = client();
+        let db = client.rocket().state::<AppDatabase>().unwrap();
+
+        let req = service::ask::NewClip {
+            content: Content::new("content").unwrap(),
+            expires: Expires::default(),
+            password: Password::new("123".to_owned()).unwrap(),
+            title: Title::default(),
+        };
+        let clip = rt
+            .block_on(async move { service::action::new_clip(req, db.get_pool()) })
+            .unwrap();
+
+        let response = client.get(format!("/clip/{}", clip.shortcode.as_str())).dispatch();
+        assert_eq!(response.status(), Status::Unauthorized);
+        let response = client.get(format!("/clip/raw{}", clip.shortcode.as_str())).dispatch();
+        assert_eq!(response.status(), Status::Unauthorized);
+
+        let response = client
+            .post(format!("/clip/{}", clip.shortcode.as_str()))
+            .header(ContentType::Form)
+            .body("password=123")
+            .dispatch();
+        assert_eq!(response.status(), Status::Ok);
+
+        let response = client
+            .get(format!("/clip/raw/{}", clip.shortcode.as_str()))
+            .cookie(Cookie::new("password", "123"))
+            .dispatch();
+        assert_eq!(response.status(), Status::Ok);
+    }
 }
